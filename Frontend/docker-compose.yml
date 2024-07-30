@@ -1,0 +1,26 @@
+services:
+  backend:
+    container_name: backend
+    image: 'backend_ws_image:latest'
+    restart: always
+    ports:
+      - '1008:1008'
+    volumes:
+      - C:/LSCO/data/LOGS/dawa_ws:/app/dawa/src/utils/general/LOGS
+    networks:
+      - ls
+
+  frontend:
+    container_name: frontend
+    image: 'frontend_ws_image:latest'
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - C:/LSCO/data/LOGS/dawa_ws:/app/dawa/src/utils/general/LOGS
+    networks:
+      - ls
+
+networks:
+  ls:
+    driver: bridge

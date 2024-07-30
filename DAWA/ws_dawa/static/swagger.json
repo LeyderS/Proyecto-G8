@@ -1,0 +1,504 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentación de Servicios Web de DAWA",
+    "version": "1.0.0",
+    "title": "Documentación de DAWA",
+    "termsOfService": "Leer wwww.ug.edu.com",
+    "contact": {
+      "email": "juan.cedenor@ug.edu.ec"
+    },
+    "license": {
+      "name": "Dawa UG",
+      "url": "none"
+    }
+  },
+  "tags": [
+    {
+      "name": "WS Security",
+      "description": "WS Security"
+    },
+    {
+      "name": "Amigos",
+      "description": "Operaciones relacionadas con amigos"
+    },
+    {
+      "name": "Publicaciones",
+      "description": "Operaciones relacionadas con publicaciones"
+    },
+    {
+      "name": "Reacciones",
+      "description": "Operaciones relacionadas con reacciones"
+    },
+    {
+      "name": "Comentarios",
+      "description": "Operaciones relacionadas con comentarios"
+    }
+  ],
+  "paths": {
+    "/security/login": {
+      "post": {
+        "tags": ["WS Security"],
+        "summary": "Login de Usuario",
+        "description": "Login de Usuario",
+        "operationId": "loginUser",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Credenciales del usuario",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/loginUserDef"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          }
+        }
+      }
+    },
+    "/user/list": {
+      "get": {
+        "tags": ["WS Security"],
+        "summary": "Lista de Usuarios",
+        "description": "Lista de Usuarios",
+        "operationId": "userList",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          }
+        }
+      }
+    },
+    "/amigos/{user_id}": {
+      "get": {
+        "tags": ["Amigos"],
+        "summary": "Obtener amigos por ID de usuario",
+        "description": "Obtiene la lista de amigos para un usuario específico",
+        "operationId": "getFriends",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "ID del usuario para obtener la lista de amigos",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Amigos"],
+        "summary": "Agregar un amigo",
+        "description": "Agrega un nuevo amigo para un usuario específico",
+        "operationId": "addFriend",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos del amigo a agregar",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddFriendDef"
+            }
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Amigo agregado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          }
+        }
+      }
+    },
+    "/publicacion": {
+      "post": {
+        "tags": ["Publicaciones"],
+        "summary": "Crear una publicación",
+        "description": "Crea una nueva publicación",
+        "operationId": "createPost",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos de la publicación",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicacionDef"
+            }
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Publicación creada exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/publicaciones/{user_id}": {
+      "get": {
+        "tags": ["Publicaciones"],
+        "summary": "Obtener publicaciones por ID de usuario",
+        "description": "Obtiene las publicaciones de un usuario específico",
+        "operationId": "getPosts",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "ID del usuario para obtener las publicaciones",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/NotFound"
+            }
+          }
+        }
+      }
+    },
+    "/reaccion": {
+      "post": {
+        "tags": ["Reacciones"],
+        "summary": "Agregar una reacción",
+        "description": "Agrega una reacción a una publicación",
+        "operationId": "addReaction",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos de la reacción",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReaccionDef"
+            }
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Reacción agregada exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/comentario": {
+      "post": {
+        "tags": ["Comentarios"],
+        "summary": "Agregar un comentario",
+        "description": "Agrega un nuevo comentario a una publicación",
+        "operationId": "addComment",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Datos del comentario",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComentarioDef"
+            }
+          },
+          {
+            "in": "header",
+            "name": "tokenapp",
+            "description": "Token para aplicación",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comentario agregado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "loginUserDef": {
+      "type": "object",
+      "properties": {
+        "login_user": {
+          "type": "string",
+          "format": "string"
+        },
+        "login_password": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "AddFriendDef": {
+      "type": "object",
+      "properties": {
+        "friend_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PublicacionDef": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string"
+        },
+        "contenido": {
+          "type": "string"
+        }
+      }
+    },
+    "ReaccionDef": {
+      "type": "object",
+      "properties": {
+        "publicacion_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tipo_reaccion": {
+          "type": "string",
+          "description": "Tipo de reacción (e.g., like, love)"
+        }
+      }
+    },
+    "ComentarioDef": {
+      "type": "object",
+      "properties": {
+        "publicacion_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "comentario": {
+          "type": "string"
+        }
+      }
+    },
+    "NotFound": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "default": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Recurso no encontrado"
+        },
+        "data": {
+          "type": "string",
+          "example": "{}"
+        },
+        "status": {
+          "type": "string",
+          "example": "404"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "default": false
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "example": "{}"
+        },
+        "status": {
+          "type": "string",
+          "example": "500"
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "default": false
+        },
+        "message": {
+          "type": "string",
+          "example": "ok"
+        },
+        "data": {
+          "type": "string",
+          "example": "{}"
+        },
+        "status": {
+          "type": "string",
+          "example": "200"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

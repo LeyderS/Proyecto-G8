@@ -1,0 +1,54 @@
+.reaction-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 5rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+}
+
+.reaction-form h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.reaction-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.reaction-form .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.reaction-form .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.reaction-form button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #286ea7;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.reaction-form button:hover {
+    background-color: #217388;
+}
+
+.reaction-form .message {
+    margin-top: 1rem;
+    text-align: center;
+    color: #155724;
+    background-color: #d4edda;
+    padding: 0.75rem;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+}
